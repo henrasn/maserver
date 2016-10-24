@@ -27,12 +27,22 @@ var getListMenu = (req, res) => {
   res.json(data);
 }
 
+var muchlist = (req, res) => {
+  var data = [];
+  for (var i = 0; i < 21; i++) {
+    data[i] = fake.lorem.words();
+  }
+  res.json(data);
+}
+
 router.route('/api')
   .get(getPost)
 router.route('/api/detail/:index')
   .get(getDetailPost)
 router.route('/list')
   .get(getListMenu)
+router.route('/lists')
+get(muchlist)
 
 app.use('/', router)
 app.listen(port, () => {
