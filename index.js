@@ -42,7 +42,7 @@ router.route('/api/detail/:index')
 router.route('/list')
   .get(getListMenu)
 router.route('/lists')
-get(muchlist)
+  .get(muchlist)
 
 app.use('/', router)
 app.listen(port, () => {
