@@ -22,10 +22,17 @@ var getDetailPost = (req, res) => {
   res.json(postData[req.params.index])
 }
 
+var getListMenu = (req, res) => {
+  var data = ["satu", "dua", "tiga", "empat", "lima", "enam", "tujuh"];
+  res.json(data);
+}
+
 router.route('/api')
   .get(getPost)
 router.route('/api/detail/:index')
   .get(getDetailPost)
+router.route('/list')
+  .get(getListMenu)
 
 app.use('/', router)
 app.listen(port, () => {
