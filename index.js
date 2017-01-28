@@ -18,6 +18,31 @@ var getPost = (req, res) => {
   res.json(postData)
 }
 
+var getItemList = (req, res) => {
+  var itemList = [];
+  for (var i = 0; i <= 50; i++) {
+    var item = {};
+
+    item.title = fake.lorem.sentence();
+    item.like = fake.random.number(99);
+    item.image = fake.image.nightlife();
+
+    itemList[i] = item;
+  }
+  res.json(itemList)
+}
+
+var getDetailItem = (req, res) => {
+  var item = {};
+
+  item.title = fake.lorem.sentence();
+  item.description = fake.lorem.paragraphs();
+  item.like = fake.random.number(99);
+  item.image = fake.image.nightlife();
+
+  res.json(item);
+}
+
 var getDetailPost = (req, res) => {
   res.json(postData[req.params.index])
 }
@@ -43,6 +68,10 @@ router.route('/list')
   .get(getListMenu)
 router.route('/lists')
   .get(muchlist)
+router.route('/itemlist')
+  .get(getItemList)
+router.route('/itemlist/detail')
+  .get(getDetailItem)
 
 app.use('/', router)
 app.listen(port, () => {
