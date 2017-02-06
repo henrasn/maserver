@@ -53,6 +53,17 @@ var emptyObject = (req, res) => {
   res.json(data);
 }
 
+var emptyPart = (req, res) => {
+  var item = {};
+
+  item.title = fake.lorem.sentence();
+  item.description = fake.lorem.paragraphs();
+  item.like = fake.random.number(99);
+  item.image = null;
+
+  res.json(item);
+}
+
 var getDetailPost = (req, res) => {
   res.json(postData[req.params.index])
 }
@@ -86,6 +97,8 @@ router.route('/itemlist/detail')
   .get(getDetailItem)
 router.route('/itemlist/detaileo')
   .get(emptyObject)
+router.route('/itemlist/detailpo')
+  .get(emptyPart)
 
 app.use('/', router)
 app.listen(port, () => {
