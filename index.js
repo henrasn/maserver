@@ -100,7 +100,7 @@ router.route('/itemlist/detail')
   .get(getDetailItem)
 router.route('/itemlist/detaileo')
   .get(emptyObject)
-router.route('itemlistpo')
+router.route('/itemlistpo')
   .get(emptyPart)
 
 app.use('/', router)
