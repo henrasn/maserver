@@ -54,14 +54,17 @@ var emptyObject = (req, res) => {
 }
 
 var emptyPart = (req, res) => {
-  var item = {};
+  var itemList = [];
+  for (var i = 0; i <= 50; i++) {
+    var item = {};
 
-  item.title = fake.lorem.sentence();
-  item.description = fake.lorem.paragraphs();
-  item.like = fake.random.number(99);
-  item.image = null;
+    item.title = fake.lorem.sentence();
+    item.like = fake.random.number(99);
+    item.image = null;
 
-  res.json(item);
+    itemList[i] = item;
+  }
+  res.json(itemList)
 }
 
 var getDetailPost = (req, res) => {
