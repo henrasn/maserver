@@ -43,6 +43,16 @@ var getDetailItem = (req, res) => {
   res.json(item);
 }
 
+var emptyArray = (req, res) => {
+  var data = [];
+  res.json(data);
+}
+
+var emptyObject = (req, res) => {
+  var data = {};
+  res.json(data);
+}
+
 var getDetailPost = (req, res) => {
   res.json(postData[req.params.index])
 }
@@ -70,8 +80,12 @@ router.route('/lists')
   .get(muchlist)
 router.route('/itemlist')
   .get(getItemList)
+router.route('/itemlistea')
+  .get(emptyArray)
 router.route('/itemlist/detail')
   .get(getDetailItem)
+router.route('/itemlist/detaileo')
+  .get(emptyObject)
 
 app.use('/', router)
 app.listen(port, () => {
