@@ -1,109 +1,128 @@
-var express = require('express');
-var fake = require('faker/locale/id_ID');
-var app = express();
-var router = express.Router();
-var port = process.env.PORT || 3456;
+  var express = require('express');
+  var fake = require('faker/locale/id_ID');
+  var app = express();
+  var router = express.Router();
+  var port = process.env.PORT || 3456;
 
-var postData = [];
+  var postData = [];
 
-var getPost = (req, res) => {
-  for (var i = 0; i <= 19; i++) {
-    var postProperty = {};
-    postProperty.judul = fake.lorem.sentence();
-    postProperty.gambar = fake.image.image();
-    postProperty.desk = fake.lorem.sentences();
+  var getPost = (req, res) => {
+    for (var i = 0; i <= 19; i++) {
+      var postProperty = {};
+      postProperty.judul = fake.lorem.sentence();
+      postProperty.gambar = fake.image.image();
+      postProperty.desk = fake.lorem.sentences();
 
-    postData[i] = postProperty
+      postData[i] = postProperty
+    }
+    res.json(postData)
   }
-  res.json(postData)
-}
 
-var getItemList = (req, res) => {
-  var itemList = [];
-  for (var i = 0; i <= 50; i++) {
+  var getItemList = (req, res) => {
+    var itemList = [];
+    for (var i = 0; i <= 50; i++) {
+      var item = {};
+
+      item.title = fake.lorem.sentence();
+      item.like = fake.random.number(99);
+      item.image = fake.image.nightlife();
+
+      itemList[i] = item;
+    }
+    res.json(itemList)
+  }
+
+  var getOrderData = (req, res) => {
+    var list = [];
+    for (var i = 0; i <= 50; i++) {
+      var item = {};
+
+      item.code = fake.random.number(999);
+      item.name = fake.random.name;
+      item.qty = fake.image.number(9);
+      item.total = fake.image.number(99999999);
+
+      list[i] = item;
+    }
+    var api = {};
+    api.response = list;
+    res.json(api);
+  }
+
+  var getDetailItem = (req, res) => {
     var item = {};
 
     item.title = fake.lorem.sentence();
+    item.description = fake.lorem.paragraphs();
     item.like = fake.random.number(99);
     item.image = fake.image.nightlife();
 
-    itemList[i] = item;
+    res.json(item);
   }
-  res.json(itemList)
-}
 
-var getDetailItem = (req, res) => {
-  var item = {};
-
-  item.title = fake.lorem.sentence();
-  item.description = fake.lorem.paragraphs();
-  item.like = fake.random.number(99);
-  item.image = fake.image.nightlife();
-
-  res.json(item);
-}
-
-var emptyArray = (req, res) => {
-  var data = [];
-  res.json(data);
-}
-
-var emptyObject = (req, res) => {
-  var data = {};
-  res.json(data);
-}
-
-var emptyPart = (req, res) => {
-  var itemList = [];
-  for (var i = 0; i <= 50; i++) {
-    var item = {};
-
-    item.title = fake.lorem.sentence();
-    item.like = fake.random.number(99);
-    item.image = null;
-
-    itemList[i] = item;
+  var emptyArray = (req, res) => {
+    var data = [];
+    res.json(data);
   }
-  res.json(itemList)
-}
 
-var getDetailPost = (req, res) => {
-  res.json(postData[req.params.index])
-}
-
-var getListMenu = (req, res) => {
-  var data = ["satu", "dua", "tiga", "empat", "lima", "enam", "tujuh"];
-  res.json(data);
-}
-
-var muchlist = (req, res) => {
-  var data = [];
-  for (var i = 0; i < 21; i++) {
-    data[i] = fake.lorem.words();
+  var emptyObject = (req, res) => {
+    var data = {};
+    res.json(data);
   }
-  res.json(data);
-}
 
-router.route('/api')
-  .get(getPost)
-router.route('/api/detail/:index')
-  .get(getDetailPost)
-router.route('/list')
-  .get(getListMenu)
-router.route('/lists')
-  .get(muchlist)
-router.route('/itemlist')
-  .get(getItemList)
-router.route('/itemlistea')
-  .get(emptyArray)
-router.route('/itemlist/detail')
-  .get(getDetailItem)
-router.route('/itemlist/detaileo')
-  .get(emptyObject)
-router.route('/itemlistpo')
-  .get(emptyPart)
+  var emptyPart = (req, res) => {
+    var itemList = [];
+    for (var i = 0; i <= 50; i++) {
+      var item = {};
 
-app.use('/', router)
-app.listen(port, () => {
-  console.log("runnning");
-})
+      item.title = fake.lorem.sentence();
+      item.like = fake.random.number(99);
+      item.image = null;
+
+      itemList[i] = item;
+    }
+    res.json(itemList)
+  }
+
+  var getDetailPost = (req, res) => {
+    res.json(postData[req.params.index])
+  }
+
+  var getListMenu = (req, res) => {
+    var data = ["satu", "dua", "tiga", "empat", "lima", "enam", "tujuh"];
+    res.json(data);
+  }
+
+  var muchlist = (req, res) => {
+    var data = [];
+    for (var i = 0; i < 21; i++) {
+      data[i] = fake.lorem.words();
+    }
+    res.json(data);
+  }
+
+  router.route('/api')
+    .get(getPost)
+  router.route('/api/detail/:index')
+    .get(getDetailPost)
+  router.route('/list')
+    .get(getListMenu)
+  router.route('/lists')
+    .get(muchlist)
+  router.route('/itemlist')
+    .get(getItemList)
+  router.route('/itemlistea')
+    .get(emptyArray)
+  router.route('/itemlist/detail')
+    .get(getDetailItem)
+  router.route('/itemlist/detaileo')
+    .get(emptyObject)
+  router.route('/itemlistpo')
+    .get(emptyPart)
+  router.route('/order')
+    .get(getOrderData)
+
+  app.use('/', router)
+  app.listen(port, () => {
+    console.log("runnning");
+  })
