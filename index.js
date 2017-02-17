@@ -38,7 +38,7 @@
       var item = {};
 
       item.code = fake.random.number(999);
-      item.name = fake.name.firstName + " " + lastName;
+      item.name = fake.name.firstName;
       item.qty = fake.random.number(9);
       item.total = fake.random.number(99999999);
 
