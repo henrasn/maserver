@@ -3,6 +3,8 @@
   var app = express();
   var router = express.Router();
   var port = process.env.PORT || 3456;
+  var path = require('path');
+  var dashboard = require('./dexa')
 
   var postData = [];
 
@@ -121,6 +123,15 @@
     .get(emptyPart)
   router.route('/order')
     .get(getOrderData)
+  router.route('/map')
+    .get((req, res) => {
+      res.sendFile(path.join(__dirname + '/map.html'))
+    })
+
+  router.route('/dashboard')
+    .get(dashboard)
+
+
 
   app.use('/', router)
   app.listen(port, () => {
