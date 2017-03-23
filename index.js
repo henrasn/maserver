@@ -43,6 +43,9 @@
       item.name = fake.name.findName();
       item.qty = fake.random.number(9);
       item.total = fake.random.number(99999999);
+      item.lat = fake.address.latitude();
+      item.long = fake.address.longitude();
+      item.image = fake.image.imageUrl();
 
       list[i] = item;
     }
